@@ -7,13 +7,22 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "27.1.0",
     "@ckeditor/ckeditor5-react": "3.0.2",
+    "@formatjs/cli": "^4.2.24",
+    "@formatjs/intl-datetimeformat": "^4.1.6",
+    "@formatjs/intl-getcanonicallocales": "^1.7.1",
+    "@formatjs/intl-numberformat": "^7.1.5",
+    "@formatjs/intl-pluralrules": "^4.0.28",
+    "@formatjs/intl-relativetimeformat": "^9.1.7",
     "@paljs/icons": "1.0.5",
     "@paljs/ui": "1.1.1",
     "@tinymce/tinymce-react": "3.12.3",
+    "babel-plugin-formatjs": "^10.3.1",
+    "babel-plugin-react-intl": "^8.2.25",
     "babel-plugin-styled-components": "^1.12.0",
     "next": "^10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-intl": "^5.20.4",
     "styled-components": "5.2.3"
   },
   "keywords": [
@@ -27,7 +36,10 @@
     "dev": "next",
     "build": "next build",
     "start": "next start --port ${PORT-3000}",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "extract:i18n": "formatjs extract '{pages,components}/**/*.{js,ts,tsx}' --format simple --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/en.json",
+    "compile:i18n": "formatjs compile-folder --ast --format simple lang compiled-lang",
+    "i18n": "npm run extract:i18n && npm run compile:i18n"
   },
   "repository": {
     "type": "git",
